@@ -19,6 +19,7 @@ RUN mkdir /home/app/webapp
 ADD . /home/app/webapp
 
 WORKDIR /home/app/webapp
+RUN cd /home/app/webapp
 RUN bundle install
 RUN ["service", "mysql", "start"]
 RUN ["RAILS_ENV=production", "bundle", "exec", "rake", "db:setup"]
