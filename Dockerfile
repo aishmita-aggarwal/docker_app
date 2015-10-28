@@ -22,7 +22,8 @@ WORKDIR /home/app/webapp
 RUN cd /home/app/webapp
 RUN bundle install
 RUN ["service", "mysql", "start"]
-RUN ["bundle", "exec", "rake", "db:setup"]
+RUN ["bundle", "exec", "rake", "db:create"]
+RUN ["bundle", "exec", "rake", "db:migrate"]
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
