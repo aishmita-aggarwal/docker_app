@@ -21,7 +21,7 @@ ADD . /home/app/webapp
 WORKDIR /home/app/webapp
 RUN cd /home/app/webapp
 RUN bundle install
-RUN ["service", "mysql", "start"]
+RUN 'service mysql start'
 RUN ["bundle", "exec", "rake", "db:create"]
 RUN ["bundle", "exec", "rake", "db:migrate"]
 
