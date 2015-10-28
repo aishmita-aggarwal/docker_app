@@ -8,8 +8,6 @@ RUN sudo apt-get update -y
 
 RUN sudo apt-get install -y build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison libmysqlclient-dev libreadline-dev libcurl4-openssl-dev python-software-properties mysql-server mysql-client
 
-RUN ["service", "mysql", "start"]
-
 RUN rm -f /etc/service/nginx/down
 
 RUN rm /etc/nginx/sites-enabled/default
@@ -22,7 +20,8 @@ ADD . /home/app/webapp
 
 WORKDIR /home/app/webapp
 RUN bundle install
-RUN bundle exec rake db:setup
+RUN ["service", "mysql", "start"]
+RUN ["RAILS_ENV=production", rake", "db:setup"]
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
