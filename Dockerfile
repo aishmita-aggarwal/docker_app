@@ -21,7 +21,7 @@ ADD . /home/app/webapp
 WORKDIR /home/app/webapp
 RUN bundle install
 RUN ["service", "mysql", "start"]
-RUN ["RAILS_ENV=production", "rake", "db:setup"]
+RUN ["RAILS_ENV=production", "bundle", "exec", "rake", "db:setup"]
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
