@@ -22,8 +22,8 @@ WORKDIR /home/app/webapp
 RUN cd /home/app/webapp
 RUN bundle install
 RUN ["service", "mysql", "start"]
-RUN ["RAILS_ENV=production", "bundle", "exec", "rake", "db:setup"]
+RUN ["bundle", "exec", "rake", "db:setup"]
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-CMD 'passenger start -a 0.0.0.0 -p 3000 -d -e production'
+CMD 'passenger start -a 0.0.0.0 -p 3000 -d'
